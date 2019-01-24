@@ -6,7 +6,7 @@
 
 ### 安装依赖
 ```sh
-python3.7 -m pip install scrapy json pymongo requests random fake_useragent
+python3.7 -m pip install scrapy pymongo requests fake_useragent
 ```
 
 注意: 需要预先安装好mongodb
