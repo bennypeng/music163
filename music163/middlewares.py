@@ -5,42 +5,30 @@
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-import logging
 from scrapy import signals
-from .settings import DEFAULT_REQUEST_HEADERS
 from .settings import MONGO_CONFIG
+from .settings import UA_LIST
 import random
 import pymongo
-import fake_useragent
-from fake_useragent import FakeUserAgentError
+import logging
 
 
 class RandomUserAgentMiddleware(object):
-
-    # def __init__(self, user_agent=''):
-    #     self.user_agent = user_agent
-
-    # @classmethod
-    # def from_crawler(cls, crawler):
-    #     return cls(
-    #         crawler.settings.getlist('USER_AGENTS')
-    #     )
-
     @classmethod
     def process_request(self, request, spider):
         try:
-            ua = fake_useragent.UserAgent(verify_ssl=False).random
+            ua = random.choice(UA_LIST)
+            request.headers['User-Agent'] = ua
+            # logging.log(logging.INFO, 'Current UserAgent: %s' % ua)
         except FakeUserAgentError:
            logging.log(logging.ERROR, 'Get UserAgent Error.')
-        # logging.log(logging.INFO, 'Current UserAgent: %s' % ua)
-        DEFAULT_REQUEST_HEADERS['User-Agent'] = ua
 
 
 class ProxyMiddleware(object):
     @classmethod
     def process_request(self, request, spider):
-        client = pymongo.MongoClient(MONGO_CONFIG['host'])
-        db = client[MONGO_CONFIG['db']]
+        client = pymongo.MongoClient(MONGO_CONFIG['proxy']['host'])
+        db = client[MONGO_CONFIG['proxy']['db']]
         proxy_list = db['proxies'].find()
         len = proxy_list.count()
         idx = random.choice(range(0, len))

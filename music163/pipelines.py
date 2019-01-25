@@ -22,8 +22,8 @@ class HotCommentsPipeline(object):
     def from_crawler(cls, crawler):
         mongo_config = crawler.settings.get('MONGO_CONFIG')
         return cls(
-            mongo_host=mongo_config['host'],
-            mongo_db=mongo_config['db']
+            mongo_host=mongo_config['music']['host'],
+            mongo_db=mongo_config['music']['db']
         )
 
     def open_spider(self, spider):
@@ -48,8 +48,8 @@ class ProxiesPipeline(object):
     def from_crawler(cls, crawler):
         mongo_config = crawler.settings.get('MONGO_CONFIG')
         return cls(
-            mongo_host=mongo_config['host'],
-            mongo_db=mongo_config['db']
+            mongo_host=mongo_config['proxy']['host'],
+            mongo_db=mongo_config['proxy']['db']
         )
 
     def open_spider(self, spider):

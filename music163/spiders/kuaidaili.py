@@ -14,7 +14,6 @@ class KuaidailiSpider(scrapy.Spider):
     allowed_domains = ['kuaidaili.com']
     base_url = 'https://www.kuaidaili.com'
     ip_test_url = 'http://httpbin.org/ip'
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36'}
     pages = 2  # 爬取的页数
     type_list = ['intr', 'inha']  # 高匿/普通
 
@@ -27,8 +26,8 @@ class KuaidailiSpider(scrapy.Spider):
     #  预处理失效代理
     def __init__(self):
         self.logger.info('=================recheck proxy start=================')
-        client = pymongo.MongoClient(host=MONGO_CONFIG['host'])
-        db = client[MONGO_CONFIG['db']]
+        client = pymongo.MongoClient(host=MONGO_CONFIG['proxy']['host'])
+        db = client[MONGO_CONFIG['proxy']['db']]
         proxy_list = db['proxies'].find()
         for data in proxy_list:
             try:
@@ -60,7 +59,6 @@ class KuaidailiSpider(scrapy.Spider):
                 callback=self.parse,
                 errback=lambda failure: self.parse_error(failure, ext={'proxy': ip_for_test}),
                 meta={'proxy': ip_for_test, 'download_timeout': 5},
-                headers=self.headers,
                 dont_filter=True)
 
     def parse(self, response):
