@@ -22,7 +22,6 @@ class HotcommentsSpider(scrapy.Spider):
 
     custom_settings = {
         'DOWNLOADER_MIDDLEWARES': {
-            'music163.middlewares.RandomUserAgentMiddleware': 1,
             'music163.middlewares.ProxyMiddleware': 100,
         },
         'ITEM_PIPELINES': {

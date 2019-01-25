@@ -63,6 +63,7 @@ DEFAULT_REQUEST_HEADERS = {
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
+    'music163.middlewares.RandomUserAgentMiddleware': 1,
     'music163.middlewares.Music163DownloaderMiddleware': 999,
 }
 

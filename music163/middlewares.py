@@ -7,18 +7,17 @@
 
 import logging
 from scrapy import signals
-from .settings import DEFAULT_REQUEST_HEADERS
 from .settings import MONGO_CONFIG
 import random
 import pymongo
-import fake_useragent
-from fake_useragent import FakeUserAgentError
+import os
+from fake_useragent import UserAgent, FakeUserAgentError
 
 
 class RandomUserAgentMiddleware(object):
 
-    # def __init__(self, user_agent=''):
-    #     self.user_agent = user_agent
+    # def __init__(self):
+    #     super(RandomUserAgentMiddleware, self) . __init__()
 
     # @classmethod
     # def from_crawler(cls, crawler):
@@ -29,11 +28,12 @@ class RandomUserAgentMiddleware(object):
     @classmethod
     def process_request(self, request, spider):
         try:
-            ua = fake_useragent.UserAgent(verify_ssl=False).random
+            ua_file = os.getcwd() + '/commons/fake_useragent.json'
+            ua = UserAgent(path=ua_file)
         except FakeUserAgentError:
            logging.log(logging.ERROR, 'Get UserAgent Error.')
         # logging.log(logging.INFO, 'Current UserAgent: %s' % ua)
-        DEFAULT_REQUEST_HEADERS['User-Agent'] = ua
+        request.headers['User-Agent'] = ua.random
 
 
 class ProxyMiddleware(object):
