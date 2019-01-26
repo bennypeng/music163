@@ -3,7 +3,7 @@ import scrapy
 import pymongo
 import requests
 from ..settings import MONGO_CONFIG
-from ..items import XicidailiItem
+from ..items import ProxiesItem
 from scrapy.spidermiddlewares.httperror import HttpError
 from twisted.internet.error import TimeoutError, TCPTimedOutError
 from twisted.internet.error import ConnectionRefusedError
