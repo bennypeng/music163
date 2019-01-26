@@ -66,7 +66,7 @@ class KuaidailiSpider(scrapy.Spider):
             proxy = response.meta['proxy']
             self.logger.info('Url: %s, Proxy: %s, Status code: %s.'
                              % (self.ip_test_url, proxy, str(response.status)))
-            item = XicidailiItem()
+            item = ProxiesItem()
             for field in item.fields:
                 try:
                     item[field] = eval(field)

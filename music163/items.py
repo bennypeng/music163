@@ -17,6 +17,7 @@ class HotcommentsItem(scrapy.Item):
     comments = scrapy.Field()
 
 
-class XicidailiItem(scrapy.Item):
+class ProxiesItem(scrapy.Item):
     table_name = 'proxies'
     proxy = scrapy.Field()
+
