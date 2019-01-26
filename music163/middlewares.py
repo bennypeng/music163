@@ -20,7 +20,7 @@ class RandomUserAgentMiddleware(object):
             ua = random.choice(UA_LIST)
             request.headers['User-Agent'] = ua
             # logging.log(logging.INFO, 'Current UserAgent: %s' % ua)
-        except FakeUserAgentError:
+        except Exception as e:
            logging.log(logging.ERROR, 'Get UserAgent Error.')
 
 
