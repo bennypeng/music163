@@ -3,7 +3,7 @@ import scrapy
 import pymongo
 import requests
 from ..settings import MONGO_CONFIG
-from ..items import XicidailiItem
+from ..items import ProxiesItem
 from scrapy.spidermiddlewares.httperror import HttpError
 from twisted.internet.error import TimeoutError, TCPTimedOutError
 from twisted.internet.error import ConnectionRefusedError
@@ -26,8 +26,8 @@ class KuaidailiSpider(scrapy.Spider):
     #  预处理失效代理
     def __init__(self):
         self.logger.info('=================recheck proxy start=================')
-        client = pymongo.MongoClient(host=MONGO_CONFIG['host'])
-        db = client[MONGO_CONFIG['db']]
+        client = pymongo.MongoClient(host=MONGO_CONFIG['proxy']['host'])
+        db = client[MONGO_CONFIG['proxy']['db']]
         proxy_list = db['proxies'].find()
         for data in proxy_list:
             try:
@@ -66,7 +66,7 @@ class KuaidailiSpider(scrapy.Spider):
             proxy = response.meta['proxy']
             self.logger.info('Url: %s, Proxy: %s, Status code: %s.'
                              % (self.ip_test_url, proxy, str(response.status)))
-            item = XicidailiItem()
+            item = ProxiesItem()
             for field in item.fields:
                 try:
                     item[field] = eval(field)
