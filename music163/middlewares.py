@@ -22,7 +22,7 @@ class RandomUserAgentMiddleware(object):
             # logging.log(logging.INFO, 'Current UserAgent: %s' % ua)
         except Exception as e:
            logging.log(logging.ERROR, 'Get UserAgent Error.')
-            
+
 
 class ProxyMiddleware(object):
     @classmethod
@@ -35,6 +35,7 @@ class ProxyMiddleware(object):
         data = proxy_list[idx]
         proxy = data['proxy']
         # print('*************ProxyMiddleware*************')
+        # proxy = 'http://61.128.208.94:3128'
         print('Request url: %s, proxy: %s' % (request.url, proxy))
         request.meta['proxy'] = proxy
 
