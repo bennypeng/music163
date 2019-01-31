@@ -13,7 +13,7 @@ class KuaidailiSpider(scrapy.Spider):
     name = 'kuaidaili'
     allowed_domains = ['kuaidaili.com']
     base_url = 'https://www.kuaidaili.com'
-    ip_test_url = 'http://httpbin.org/ip'
+    ip_test_url = 'https://music.163.com'
     pages = 2  # 爬取的页数
     type_list = ['intr', 'inha']  # 高匿/普通
 
@@ -31,7 +31,7 @@ class KuaidailiSpider(scrapy.Spider):
         proxy_list = db['proxies'].find()
         for data in proxy_list:
             try:
-                response = requests.get(self.ip_test_url, proxies={'http': data['proxy']}, timeout=5)
+                response = requests.get(self.ip_test_url, proxies={'http': data['proxy']}, timeout=3)
                 self.logger.info('test proxy %s ok.' % (data['proxy']))
             except Exception as e:
                 db['proxies'].remove(data)
