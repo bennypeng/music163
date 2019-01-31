@@ -22,16 +22,16 @@ scrapy crawl playlists   # 爬取所有热门歌单信息
 ```
 
 ## 更新日志
-### [1.0.0] - 2019-01-24
-- 增加爬虫hotcomments用于爬取歌曲热评
-- 增加爬虫xicidaili用于爬取可用代理ip
-- 增加爬虫kuaidaili用于爬取可用代理ip
-- 使用fake_useragent生成随机USER-AGENT
+### [1.0.2] - 2019-01-31
+- 增加爬虫playlists用于爬取热门歌单信息
 ### [1.0.1] - 2019-01-27
 - 修复了一些错误
     - fake_useragent报错Maximum amount of retries reached，暂无法解决，改为直接从配置中随机读取ua
 - 进行了一些优化
     - xicidaili和kuaidaili使用同一个item来存储代理
-### [1.0.2] - 2019-01-31
-- 增加爬虫playlists用于爬取热门歌单信息
+### [1.0.0] - 2019-01-24
+- 增加爬虫hotcomments用于爬取歌曲热评
+- 增加爬虫xicidaili用于爬取可用代理ip
+- 增加爬虫kuaidaili用于爬取可用代理ip
+- 使用fake_useragent生成随机USER-AGENT
 
