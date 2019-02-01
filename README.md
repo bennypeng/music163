@@ -1,4 +1,4 @@
-# music163 with scrapy
+# 基于scrapy的网易云音乐歌单信息/歌曲热评爬虫
 > 小弟抱以学习python与scrapy的心态完成此项目，请大家海涵，勿喷。
 > 如有建议，可进行pull request，谢谢！
 
