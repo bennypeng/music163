@@ -20,8 +20,15 @@ scrapy crawl xicidaili   # 爬取xicidaili代理ip
 scrapy crawl hotcomments # 爬取所有歌曲热门评论
 scrapy crawl playlists   # 爬取所有热门歌单信息
 ```
+### 辅助脚本
+```sh
+cd music163/music163
+python3.7 output_top100_playlist.py  # 输出播放量前100名歌单信息
+```
 
 ## 更新日志
+### [1.0.3] - 2019-02-01
+- 增加辅助脚本output_top100_playlist.py输出歌单信息
 ### [1.0.2] - 2019-01-31
 - 增加爬虫playlists用于爬取热门歌单信息
 ### [1.0.1] - 2019-01-27
